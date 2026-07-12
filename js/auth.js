@@ -15,6 +15,7 @@ import {
     getDocs
 } from "https://www.gstatic.com/firebasejs/12.1.0/firebase-firestore.js";
 
+// [로그인 함수]
 window.login = async function () {
     const idInput = document.getElementById("id");
     const passwordInput = document.getElementById("password");
@@ -110,10 +111,11 @@ window.executeChangePassword = async function () {
     }
 };
 
-
+// [인증 상태 감지 레일]
 onAuthStateChanged(auth, async (user) => {
     if (!user) {
         const app = document.getElementById("app");
+        // 💡 아이디창과 비밀번호창에 onkeydown="handleLoginEnter(event)" 속성을 추가했습니다.
         app.innerHTML = `
             <div class="container">
                 <h1>상점 프로그램</h1>
@@ -139,7 +141,23 @@ onAuthStateChanged(auth, async (user) => {
     }
 
     window.currentUser = snap.data();
-    window.currentUser.id = id;
+window.currentUser.id = id;
+
+const today = new Date().toLocaleDateString("sv-SE");
+
+if (window.currentUser.lastRouletteDate !== today) {
+
+    window.currentUser.rouletteToday = 0;
+    window.currentUser.lastRouletteDate = today;
+
+    await updateDoc(ref, {
+
+        rouletteToday: 0,
+        lastRouletteDate: today
+
+    });
+
+}
 
     window.showMainPage();
 
