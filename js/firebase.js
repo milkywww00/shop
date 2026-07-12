@@ -4,7 +4,7 @@ import { getAuth } from "https://www.gstatic.com/firebasejs/12.1.0/firebase-auth
 import { getFirestore } from "https://www.gstatic.com/firebasejs/12.1.0/firebase-firestore.js";
 
 // ✨ 외부 설정 파일에서 설정을 가져옵니다.
-import { firebaseConfig } from "./config.js";
+import { Config } from "./config.js";
 
 const app = initializeApp(firebaseConfig);
 
