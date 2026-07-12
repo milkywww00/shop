@@ -188,12 +188,13 @@ window.spinRoulette = async function(){
 
     transaction.update(ref,{
 
-        money:newMoney,
+    money: newMoney,
 
-        rouletteToday:
-        window.currentUser.rouletteToday
+    rouletteToday: window.currentUser.rouletteToday,
 
-    });
+    lastRouletteDate: new Date().toLocaleDateString("sv-SE")
+
+});
 
 });
 
@@ -502,5 +503,7 @@ function getRouletteResult(){
     if(random < 97) return 3;
 
     return 4;
+
+}
 
 }
